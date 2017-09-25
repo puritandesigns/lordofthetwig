@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Lord of the Twig</title>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/prism.css" rel="stylesheet">
+    <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+
+            
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>    
+    <main id="content" class="container language-twig">
+        <h1>The Lord of the Twig</h1>
+        
+<h2>If Statement</h2>
+
+<p>If the statement resolves or amounts to something true, do what comes after:</p>
+
+<pre><code>
+{% set truthy = true %}
+{% set falsey = false %}
+
+{% if truthy %}
+    You'll see this.
+{% endif %}
+
+{% if falsey %}
+    You won't see this.
+{% endif %}
+
+</code></pre>
+
+
+<div class="well">
+    You'll see this.
+
+</div>
+
+<h3>Truthy and Falsey Cautions</h3>
+
+<ul>
+    <li>1 = true (or any number > 0)</li>
+    <li>0 = false</li>
+    <li>null = false</li>
+    <li>Empty strings ('' or "") = false</li>
+    <li>Non-empty strings ('something' or '&nbsp;&nbsp;') = true</li>
+</ul>
+
+<pre><code>
+{% set location = 'shire' %}
+
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% endif %} {% if location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% endif %}
+
+</code></pre>
+
+
+<div class="well">
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+ </div>
+
+<h3>Switch location and go through the same code</h3>
+<pre><code>
+{% set location = 'rivendell' %}
+
+</code></pre>
+
+
+<div class="well">
+     [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+</div>
+
+<h2>Else and elseif Statement</h2>
+
+<p>Using elseif allows to add other checks to the code block</p>
+<p>
+    Using else is a catch all.
+    If none of the previous statements amount to true,
+    then do what's in the else block.
+</p>
+
+<p>
+    We can rewrite the above code and use an elseif statement:
+</p>
+
+<pre><code>
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% elseif location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% endif %}
+
+</code></pre>
+
+<div class="well">
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+</div>
+
+<p>But if the fellowship is somewhere else, we can catch that with "else":</p>
+
+<pre><code>
+{% set location = 'moria' %}
+
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% elseif location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% else %}
+    All that is gold does not glitter, not all those who wander are lost...
+{% endif %}
+
+</code></pre>
+
+
+<div class="well">
+    All that is gold does not glitter, not all those who wander are lost...
+</div>
+
+<h2>Other if checks</h2>
+<p>You don't need to always use "==" in if statements. Here's others:</p>
+<ul class="list-unstyled">
+    <li>
+        <h3>Signs: <, >, <=, =></h3>
+        Use greater/lesser than or greater/lesser than or equal to:<br>
+<pre><code>
+{% if location == 'weathertop' %}
+    {% set ring_wraiths = 5 %}
+    {% if ring_wraiths < 6 %}
+        Frodo will escape to Rivendell
+    {% else %}
+        Frodo will be captured
+    {% endif %}
+{% endif %}
+
+</code></pre>
+        or
+<pre><code>
+{% if location == 'weathertop' %}
+    {% set ring_wraiths = 5 %}
+    {% if ring_wraiths <= 5 %}
+        Frodo will escape to Rivendell
+    {% else %}
+        Frodo will be captured
+    {% endif %}
+{% endif %}
+
+</code></pre>
+
+        <div class="well">
+                                        Frodo will escape to Rivendell
+                    </div>
+    </li>
+
+    <li>
+        <h3>Not equal: != or not</h3>
+        <p>You can negate a check:</p>
+<pre><code>
+{% if location != 'shire' %}Far from home{% endif %}
+
+{% if ring_wraiths != 9 %}Not all are accounted for{% endif %}
+
+{% if not truthy %}
+    Since truthy is true and the not makes it false, this won't show.
+{% else %}
+    So we need an else statement to show something.
+{% endif %}
+
+{% if not falsey %}Negated falsey makes it true!{% endif %}
+
+</code></pre>
+
+<div class="well">
+    Far from home    <br>
+    Not all are accounted for    <br>
+            So we need an else statement to show something.
+        <br>
+    Negated falsey makes it true!    <br>
+</div>
+    </li>
+</ul>
+
+
+    </main>
+
+            <footer class="container">
+        <hr>
+        
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>        </footer>
+    
+    <script src="assets/prism.js"></script>
+</body>
+</html>

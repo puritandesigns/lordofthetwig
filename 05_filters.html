@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Lord of the Twig</title>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/prism.css" rel="stylesheet">
+    <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+
+            
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>    
+    <main id="content" class="container language-twig">
+        <h1>The Lord of the Twig</h1>
+        
+<h1>Filters</h1>
+<p>
+    Filters change what will get printed to the screen. They are denoted by a pipe,
+    then the name of the filter, and then arguments if there are any.
+</p>
+
+<h2>| title</h2>
+<pre><code>
+<p>{{ "the lord of the rings" | title }}</p>
+
+</code></pre>
+
+<p class="well">The Lord Of The Rings</p>
+
+<h2>| capitalize</h2>
+<pre><code>
+<p>{{ "frodo" | capitalize }}<br>
+{% set sam = "samwise" %}
+{{ sam | capitalize }}
+</p>
+</code></pre>
+
+<p class="well">
+    Frodo<br>
+        Samwise
+</p>
+
+<h2>| default</h2>
+<pre><code>
+<p>{% set ringwraith = null %}
+{{ ringwraith | default('The Witch King') }}
+<br>
+{% set sauron = "The Dark Lord" %}
+{{ sauron | default("This won't display.") }}
+</p>
+</code></pre>
+
+    <p class="well">
+                The Witch King
+        <br>
+                The Dark Lord
+    </p>
+
+    <h2>| lower & | upper</h2>
+<pre><code>
+<p>{{ "THIS WILL BE LOWERCASE" | lower }}
+<br>
+{{ "this will be uppercase" | upper }}
+</p>
+</code></pre>
+
+    <p class="well">
+        this will be lowercase
+        <br>
+        THIS WILL BE UPPERCASE
+    </p>
+
+    <h2>| striptags</h2>
+<pre><code>
+<p>{{ "&lt;p&gt;Roads go ever &lt;u&gt;on&lt;/u&gt; and &lt;em&gt;on&lt;/em&gt; (&lt;u&gt;with&lt;/u&gt; formatting).&lt;/p&gt;" }}
+</p><p>
+{{ "&lt;p&gt;Roads go ever &lt;u&gt;on&lt;/u&gt; and &lt;em&gt;on&lt;/em&gt; (&lt;u&gt;without&lt;/u&gt; formatting).&lt;/p&gt;" | striptags }}
+</p>
+</code></pre>
+
+<div class="well">
+    <p>
+        <p>Roads go ever <u>on</u> and <em>on</em>
+             (<u>with</u> formatting).</p>
+    </p>
+
+    <p>
+        Roads go ever on and on
+             (without formatting).
+    </p>
+</div>
+
+<h2>| nl2br (new line to &lt;br&gt;)</h2>
+
+<h3>Sample code</h3>
+
+<pre><code><p>
+{{
+   "Roads go ever ever on,
+    Over rock and under tree,
+    By caves where never sun has shone,
+    By streams that never find the sea;
+    Over snow by winter sown,
+    And through the merry flowers of June,
+    Over grass and over stone,
+    And under mountains in the moon." | nl2br
+}}
+</p>
+</code></pre>
+
+<h3>Without nl2br</h3>
+
+<p class="well">
+    Roads go ever ever on,
+        Over rock and under tree,
+        By caves where never sun has shone,
+        By streams that never find the sea;
+        Over snow by winter sown,
+        And through the merry flowers of June,
+        Over grass and over stone,
+        And under mountains in the moon.
+</p>
+
+<h3>With nl2br</h3>
+
+<p class="well">
+    Roads go ever ever on,<br />
+        Over rock and under tree,<br />
+        By caves where never sun has shone,<br />
+        By streams that never find the sea;<br />
+        Over snow by winter sown,<br />
+        And through the merry flowers of June,<br />
+        Over grass and over stone,<br />
+        And under mountains in the moon.
+</p>
+
+<h3>Add in striptags</h3>
+<pre><code><p>
+{{
+   "&lt;p&gt;Roads go ever ever on,&lt;br&gt;
+    Over rock and under tree,&lt;br&gt;
+    By caves where never sun has shone,&lt;br&gt;
+    By streams that never find the sea;
+    &lt;/p&gt;&lt;p&gt;Over snow by winter sown,&lt;br&gt;
+    And through the merry flowers of June,&lt;br&gt;
+    Over grass and over stone,&lt;br&gt;
+    And under mountains in the moon.
+    &lt;/p&gt;" | striptags | nl2br
+}}
+</p>
+</code></pre>
+
+    <div class="well">
+        Roads go ever ever on,<br />
+        Over rock and under tree,<br />
+        By caves where never sun has shone,<br />
+        By streams that never find the sea;<br />
+        Over snow by winter sown,<br />
+        And through the merry flowers of June,<br />
+        Over grass and over stone,<br />
+        And under mountains in the moon.<br />
+         
+    </div>
+
+    <h2>| trim</h2>
+<pre><code><p>
+{{ "There will not be a large space between sentences." }}
+{{ "       Even though there's a large gap in the code." | trim }}
+</p><p>
+{{ "......You can also remove other characters......" | trim('.') }}<br>
+{{ "!.'And it doesn't have to be just one type of character...." | trim(".!'") }}
+</p>
+</code></pre>
+
+    <div class="well">
+        <p>
+            There will not be a large space between sentences.
+            Even though there&#039;s a large gap in the code.
+        </p>
+
+        <p>
+            You can also remove other characters<br>
+            And it doesn&#039;t have to be just one type of character
+        </p>
+    </div>
+    </main>
+
+            <footer class="container">
+        <hr>
+        
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>        </footer>
+    
+    <script src="assets/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Lord of the Twig</title>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/prism.css" rel="stylesheet">
+    <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+
+            
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>    
+    <main id="content" class="container language-twig">
+        <h1>The Lord of the Twig</h1>
+        <h2>Using <code>{% include %}</code></h2>
+<p>
+    The <code>{% include %}</code> tag allows you to pull in
+    a completely different file.
+</p>
+
+<h3>Theoretical file structure</h3>
+<pre><code>
+- includes/
+    - frodo.twig
+    - sam.twig
+    - merry.twig
+    - pippin.twig
+    ...
+- pages/
+    - shire.twig
+    - rivendell.twig
+    - fellowship.twig
+    ...
+</code></pre>
+
+<h3>Contents of <code>/includes/frodo.twig</code></h3>
+
+<pre><code>
+&lt;h3&gt;Frodo Baggins {% demo_variable|default("") %}&lt;/h3&gt;
+
+&lt;p&gt;
+    Frodo is introduced in The Fellowship of the Ring as the adoptive heir of
+    Bilbo Baggins. The chapter "A Long-expected Party" relates that Frodo's
+    parents Drogo Baggins and Primula Brandybuck had been killed in a boating
+    accident when Frodo was 12.
+&lt;/p&gt;
+&lt;p&gt;
+    Frodo subsequently spent the next nine years living with his maternal family,
+    the Brandybucks in Brandy Hall. At the age of 21 he was adopted by his cousin,
+    Bilbo, who brought him to live at Bag End. He and Bilbo shared the same birthday,
+    the 22nd of 'September'.
+&lt;/p&gt;
+&lt;p&gt;
+    It was Bilbo who introduced the Elvish languages to Frodo,
+    and they often shared long walking trips together.
+&lt;/p&gt;
+
+</code></pre>
+
+<h3>Within <code>/pages/fellowship.twig</code></h3>
+
+<pre><code>
+Content, more content...
+
+{% set demo_variable = "of the Shire" %}
+<div class="well">{% include '/includes/frodo.twig' %}</div>
+
+Rollin' on with the content....
+
+</code></pre>
+
+<div class="well">
+    <p>Content, more content...</p>
+
+    
+    <h3>Frodo Baggins of the Shire</h3>
+
+<p>
+    Frodo is introduced in The Fellowship of the Ring as the adoptive heir of
+    Bilbo Baggins. The chapter "A Long-expected Party" relates that Frodo's
+    parents Drogo Baggins and Primula Brandybuck had been killed in a boating
+    accident when Frodo was 12.
+</p>
+<p>
+    Frodo subsequently spent the next nine years living with his maternal family,
+    the Brandybucks in Brandy Hall. At the age of 21 he was adopted by his cousin,
+    Bilbo, who brought him to live at Bag End. He and Bilbo shared the same birthday,
+    the 22nd of 'September'.
+</p>
+<p>
+    It was Bilbo who introduced the Elvish languages to Frodo,
+    and they often shared long walking trips together.
+</p>
+    <p>Rollin' on with the content....</p>
+</div>
+
+
+<h3>Include Documentation</h3>
+<p>
+    You can <a href="http://twig.sensiolabs.org/doc/tags/include.html">
+        check out the Include tag documentation</a> for more information.
+    </a>
+    <br><br>
+    You can also:
+</p>
+
+<ul>
+    <li>Limit what variables get passed to the included file with <code>only</code></li>
+    <li>Add new variables that get passed using <code>with {key: value}</code></li>
+    <li>Pass a list of files to include. The first one found will be included</li>
+    <li>Protect against missing files with <code>ignore missing</code></li>
+</ul>
+    </main>
+
+            <footer class="container">
+        <hr>
+        
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>        </footer>
+    
+    <script src="assets/prism.js"></script>
+</body>
+</html>

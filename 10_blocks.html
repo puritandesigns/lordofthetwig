@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Lord of the Twig</title>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/prism.css" rel="stylesheet">
+    <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+
+            
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>    
+    <main id="content" class="container language-twig">
+        <h1>The Lord of the Twig</h1>
+        
+<h2>Blocks</h2>
+<p>
+    Think of blocks as blueprints or templates that can be modified by
+    <code>{% extends %}</code>ing them.
+</p>
+
+<h3>Here's the blueprint (/templates/fellowship.twig)</h3>
+
+<pre><code>
+{% block title %}
+    &lt;h1&gt;The Fellowship of the Ring&lt;/h1&gt;
+{% endblock %}
+
+{% block subtitle %}
+    {% if subtitle %}
+        &lt;h2&gt;{{ subtitle }}&lt;/h2&gt;
+    {% endif %}
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block footer %}
+    &lt;p&gt;&lt;small&gt;
+        This site is a loving tribute to a great book.
+    &lt;/small&gt;&lt;/p&gt;
+{% endblock %}
+
+
+</code></pre>
+
+<h3>Here's an extended page (/blocks/frodo.twig)</h3>
+<pre><code>
+{% extends '/templates/fellowship.twig' %}
+
+{% set subtitle = 'The Fellowship of the Ring' %}
+
+{% block title %}
+    &lt;h1&gt;Frodo Baggins of the Shire&lt;/h1&gt;
+{% endblock %}
+
+{% block content %}
+&lt;p&gt;
+    Frodo is introduced in The Fellowship of the Ring as the adoptive heir of
+    Bilbo Baggins. The chapter "A Long-expected Party" relates that Frodo's
+    parents Drogo Baggins and Primula Brandybuck had been killed in a boating
+    accident when Frodo was 12.
+&lt;/p&gt;
+&lt;p&gt;
+    Frodo subsequently spent the next nine years living with his maternal family,
+    the Brandybucks in Brandy Hall. At the age of 21 he was adopted by his cousin,
+    Bilbo, who brought him to live at Bag End. He and Bilbo shared the same birthday,
+    the 22nd of 'September'.
+&lt;/p&gt;
+&lt;p&gt;
+    It was Bilbo who introduced the Elvish languages to Frodo,
+    and they often shared long walking trips together.
+&lt;/p&gt;
+{% endblock %}
+
+</code></pre>
+
+<h3>And here's the result</h3>
+<div class="well">
+        <h1>Frodo Baggins of the Shire</h1>
+
+            <h2>The Fellowship of the Ring</h2>
+    
+<p>
+    Frodo is introduced in The Fellowship of the Ring as the adoptive heir of
+    Bilbo Baggins. The chapter "A Long-expected Party" relates that Frodo's
+    parents Drogo Baggins and Primula Brandybuck had been killed in a boating
+    accident when Frodo was 12.
+</p>
+<p>
+    Frodo subsequently spent the next nine years living with his maternal family,
+    the Brandybucks in Brandy Hall. At the age of 21 he was adopted by his cousin,
+    Bilbo, who brought him to live at Bag End. He and Bilbo shared the same birthday,
+    the 22nd of 'September'.
+</p>
+<p>
+    It was Bilbo who introduced the Elvish languages to Frodo,
+    and they often shared long walking trips together.
+</p>
+
+    <p><small>
+        This site is a loving tribute to a great book.
+    </small></p>
+</div>
+
+<h3>Block Documentation</h3>
+<p>
+    The block and extends tags are very powerful. You can
+    <a href="http://twig.sensiolabs.org/doc/tags/extends.html">
+        check out the Extends documentation</a> for more information.
+    </a>
+</p>
+    </main>
+
+            <footer class="container">
+        <hr>
+        
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>        </footer>
+    
+    <script src="assets/prism.js"></script>
+</body>
+</html>

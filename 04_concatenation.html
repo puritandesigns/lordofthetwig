@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Lord of the Twig</title>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/prism.css" rel="stylesheet">
+    <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+
+            
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>    
+    <main id="content" class="container language-twig">
+        <h1>The Lord of the Twig</h1>
+            <p>
+        You can use <code>~</code> to combine strings between <code>{{ }}</code>.
+    </p>
+
+    <pre><code>
+{% set Hobbits = {
+    frodo: 'Frodo',
+    samwise: 'Sam',
+    merry: 'Merry',
+    pippin: 'Pippin'
+} %}
+
+The four Hobbits who travelled out of the Shire are
+{{ Hobbits.frodo ~ ", " ~ Hobbits.samwise ~ ", " ~ Hobbits.merry ~ ", and " ~ Hobbits.pippin ~ "." }}
+
+{#
+Or you could write it like this:<br>
+The four Hobbits who travelled out of the Shire are
+{{ Hobbits.frodo }}, {{ Hobbits.samwise }}, {{ Hobbits.merry }}, and {{ Hobbits.pippin }}.
+#}
+    </code></pre>
+
+    <div class="well">
+    
+The four Hobbits who travelled out of the Shire are
+Frodo, Sam, Merry, and Pippin.
+</div>
+    </main>
+
+            <footer class="container">
+        <hr>
+        
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>        </footer>
+    
+    <script src="assets/prism.js"></script>
+</body>
+</html>

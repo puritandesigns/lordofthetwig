@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Lord of the Twig</title>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/prism.css" rel="stylesheet">
+    <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+
+            
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>    
+    <main id="content" class="container language-twig">
+        <h1>The Lord of the Twig</h1>
+        
+<h2>More If Statement Possibilities</h2>
+
+<h3>Combining if statements with ands and ors </h3>
+
+<pre><code>
+{% if location == 'weathertop' and ring_wraiths > 5 %}
+    Frodo will be captured.
+{% else %}
+    Frodo will escape.
+{% endif %}
+
+{% set gandalf = {
+    job: 'Wizard',
+    friends: {
+        count: 8,
+        status: 'in mortal danger'
+    }
+} %}
+{% if location == 'moria' or gandalf.friends.status == 'in mortal danger' %}
+    Gandalf will sacrifice himself.
+{% endif %}
+
+</code></pre>
+
+<div class="well">
+    <p>
+            Frodo will escape.
+        </p>
+                <p>Gandalf will sacrifice himself.</p>
+    </div>
+
+<h3>Working with strings (length, starts/ends with)</h3>
+<pre><code>
+{% set hobbit = 'frodo' %}
+{% if hobbit|length == 5 and (hobbit starts with 'f' or hobbit ends with 'o') %}
+    The Hobbit is Frodo
+{% endif %}
+
+</code></pre>
+    <p class="well">The Hobbit is Frodo</p>
+
+<h3>Working with numbers (odd/even and divisble by)</h3>
+
+<pre><code>
+{% set fellowship = 9 %}
+{% if fellowship|length == 9 or fellowship is odd %}
+    <p class="well">Boromir has not fallen yet.</p>
+{% elseif fellowship is odd %}
+    Alas for Boromir the Brave!
+{% endif %}
+
+</code></pre>
+
+    <p class="well">Boromir has not fallen yet.</p>
+
+<h3>Working with arrays (iterable, length, in)</h3>
+<pre><code>
+{% set fellowship = [
+    'frodo',
+    'sam',
+    'merry',
+    'pippin',
+    'aragorn',
+    'gandalf',
+    'boromir',
+    'legolas',
+    'gimli'
+] %}
+{# if not sure if fellowship is an array or number... #}
+{% if fellowship is iterable and (fellowship|length == 9 or 'boromir' in fellowship) %}
+    <p class="well">Boromir has not fallen yet.</p>
+{% endif %}
+
+</code></pre>
+
+    <p class="well">Boromir has not fallen yet.</p>
+
+<h3>Empty</h3>
+<pre><code>
+{% if ring_wraith is empty %}
+    <p class="well">A mortal... who keeps one of the Great Rings, does not die,
+    but he does not grow or obtain more life, he merely continues,
+    until at last every minute is a weariness.
+    And if he often uses the Ring to make himself invisible, he fades:
+    he becomes in the end invisible permanently, and walks in the twilight
+    under the eye of the dark power that rules the Rings.</p>
+{% endif %}
+
+</code></pre>
+    <p class="well">A mortal... who keeps one of the Great Rings, does not die,
+        but he does not grow or obtain more life, he merely continues,
+        until at last every minute is a weariness.
+        And if he often uses the Ring to make himself invisible, he fades:
+        he becomes in the end invisible permanently, and walks in the twilight
+        under the eye of the dark power that rules the Rings.</p>
+
+<h3>Tests Documentation</h3>
+<p>
+    You can <a href="http://twig.sensiolabs.org/doc/tests/index.html">
+        check out the Tests documentation</a> for these and other if checks.
+    </a>
+</p>
+
+    </main>
+
+            <footer class="container">
+        <hr>
+        
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>        </footer>
+    
+    <script src="assets/prism.js"></script>
+</body>
+</html>

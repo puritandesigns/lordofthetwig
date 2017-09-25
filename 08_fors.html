@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Lord of the Twig</title>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/prism.css" rel="stylesheet">
+    <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+
+            
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>    
+    <main id="content" class="container language-twig">
+        <h1>The Lord of the Twig</h1>
+            <h1>For Statements</h1>
+    <p>
+        The use of <code>{% for %}</code> loops allows you to go through
+        arrays or objects one item at a time.
+    </p>
+
+    <h2>Simple for loop</h2>
+<pre><code>
+{% set fellowship = {
+    frodo: {
+        full_name: 'Frodo Baggins',
+        parent: 'Drogo',
+        race: 'hobbit',
+        titles: ['Elf-friend','Ring Bearer'],
+        ring_bearer: 1
+    },
+    sam: {
+        full_name: 'Samwise Gamgee',
+        parent: 'Hamfast',
+        race: 'hobbit',
+        titles: ['Mayor of the Shire'],
+        ring_bearer: 1,
+    },
+    merry: {
+        full_name: 'Merriadoc Brandybuck',
+        parent: 'Seradoc',
+        race: 'hobbit',
+        titles: ['Holdwine of the Mark'],
+        ring_bearer: 0
+    },
+    pippin: {
+        full_name: 'Peregrin Took',
+        parent: 'Palladin',
+        race: 'hobbit',
+        titles: ['Knight of Gondor','Pheriannath','Thain'],
+        ring_bearer: 0
+    },
+    gandalf: {
+        full_name: 'Gandalf the Grey',
+        parent: null,
+        race: 'Maiar',
+        titles: ['Greyhame','Stormcrow','Olorin','Incanus','Tharkun','Gandalf the Grey','Gandalf the White','Mithrandir','The Grey Pilgrim','The White Rider','Lathspell'],
+        ring_bearer: 0
+    },
+    aragorn: {
+        full_name: 'Aragorn',
+        parent: 'Arathorn',
+        race: 'human',
+        titles: ['The Dunadan','Longshanks','Strider','Telcontar','Elessar','Wingfoot','Enviyatar','Estel','Thorongil'],
+        ring_bearer: 0
+    },
+    boromir: {
+        full_name: 'Boromir',
+        parent: 'Denethor',
+        race: 'human',
+        titles: ['Captain of the White Tower','High Warden of the White Tower'],
+        ring_bearer: 0
+    },
+    legolas: {
+        full_name: 'Legolas Greenleaf',
+        parent: 'Thranduil',
+        race: 'elf',
+        titles: ['Prince of the Wooden Realm'],
+        ring_bearer: 0
+    },
+    gimli: {
+        full_name: 'Gimli',
+        parent: 'Gloin',
+        race: 'dwarf',
+        titles: ['Elf-friend','Lockbearer','Lord of the Glittering Caves'],
+        ring_bearer: 0
+    }
+} %}
+
+&lt;h3&gt;The Fellowship of the Ring&lt;/h3&gt;
+&lt;ul&gt;
+{% for member in fellowship %}
+    &lt;li&gt;
+        {{ member.full_name -}}
+        {% if member.parent %}
+        , son of {{ member.parent }}
+        {% endif %}
+    &lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;
+
+</code></pre>
+
+<div class="well">
+    <h3>The Fellowship of the Ring</h3>
+    <ul>
+            <li>
+            Frodo Baggins, son of Drogo        </li>
+            <li>
+            Samwise Gamgee, son of Hamfast        </li>
+            <li>
+            Merriadoc Brandybuck, son of Seradoc        </li>
+            <li>
+            Peregrin Took, son of Palladin        </li>
+            <li>
+            Gandalf the Grey        </li>
+            <li>
+            Aragorn, son of Arathorn        </li>
+            <li>
+            Boromir, son of Denethor        </li>
+            <li>
+            Legolas Greenleaf, son of Thranduil        </li>
+            <li>
+            Gimli, son of Gloin        </li>
+        </ul>
+</div>
+
+<h2>For key and value</h2>
+    
+<pre><code>
+{% for name, member in fellowship %}
+&lt;li&gt;
+    &lt;h4&gt;{{ name|title }}&lt;/h4&gt;
+    {% for key, value in member %}
+        {{ key }}:
+        {% if value is iterable %}
+            {% for val in value %}
+                {{ val }},
+            {% endfor %}
+        {% elseif value is empty %}
+            nope...
+        {% else %}
+            {{ value }}
+        {% endif %}
+        &lt;br&gt;
+    {% endfor %}
+&lt;/li&gt;
+{% endfor %}
+
+</code></pre>
+    
+<div class="well">
+    <h3>The Fellowship of the Ring</h3>
+    <ul>
+                    <li>
+                <h4>Frodo</h4>
+                                    full_name:
+                                            Frodo Baggins
+                                        <br>
+                                    parent:
+                                            Drogo
+                                        <br>
+                                    race:
+                                            hobbit
+                                        <br>
+                                    titles:
+                                                                        Elf-friend,
+                                                    Ring Bearer,
+                                                                <br>
+                                    ring_bearer:
+                                            1
+                                        <br>
+                            </li>
+                    <li>
+                <h4>Sam</h4>
+                                    full_name:
+                                            Samwise Gamgee
+                                        <br>
+                                    parent:
+                                            Hamfast
+                                        <br>
+                                    race:
+                                            hobbit
+                                        <br>
+                                    titles:
+                                                                        Mayor of the Shire,
+                                                                <br>
+                                    ring_bearer:
+                                            1
+                                        <br>
+                            </li>
+                    <li>
+                <h4>Merry</h4>
+                                    full_name:
+                                            Merriadoc Brandybuck
+                                        <br>
+                                    parent:
+                                            Seradoc
+                                        <br>
+                                    race:
+                                            hobbit
+                                        <br>
+                                    titles:
+                                                                        Holdwine of the Mark,
+                                                                <br>
+                                    ring_bearer:
+                                            nope...
+                                        <br>
+                            </li>
+                    <li>
+                <h4>Pippin</h4>
+                                    full_name:
+                                            Peregrin Took
+                                        <br>
+                                    parent:
+                                            Palladin
+                                        <br>
+                                    race:
+                                            hobbit
+                                        <br>
+                                    titles:
+                                                                        Knight of Gondor,
+                                                    Pheriannath,
+                                                    Thain,
+                                                                <br>
+                                    ring_bearer:
+                                            nope...
+                                        <br>
+                            </li>
+                    <li>
+                <h4>Gandalf</h4>
+                                    full_name:
+                                            Gandalf the Grey
+                                        <br>
+                                    parent:
+                                            nope...
+                                        <br>
+                                    race:
+                                            Maiar
+                                        <br>
+                                    titles:
+                                                                        Greyhame,
+                                                    Stormcrow,
+                                                    Olorin,
+                                                    Incanus,
+                                                    Tharkun,
+                                                    Gandalf the Grey,
+                                                    Gandalf the White,
+                                                    Mithrandir,
+                                                    The Grey Pilgrim,
+                                                    The White Rider,
+                                                    Lathspell,
+                                                                <br>
+                                    ring_bearer:
+                                            nope...
+                                        <br>
+                            </li>
+                    <li>
+                <h4>Aragorn</h4>
+                                    full_name:
+                                            Aragorn
+                                        <br>
+                                    parent:
+                                            Arathorn
+                                        <br>
+                                    race:
+                                            human
+                                        <br>
+                                    titles:
+                                                                        The Dunadan,
+                                                    Longshanks,
+                                                    Strider,
+                                                    Telcontar,
+                                                    Elessar,
+                                                    Wingfoot,
+                                                    Enviyatar,
+                                                    Estel,
+                                                    Thorongil,
+                                                                <br>
+                                    ring_bearer:
+                                            nope...
+                                        <br>
+                            </li>
+                    <li>
+                <h4>Boromir</h4>
+                                    full_name:
+                                            Boromir
+                                        <br>
+                                    parent:
+                                            Denethor
+                                        <br>
+                                    race:
+                                            human
+                                        <br>
+                                    titles:
+                                                                        Captain of the White Tower,
+                                                    High Warden of the White Tower,
+                                                                <br>
+                                    ring_bearer:
+                                            nope...
+                                        <br>
+                            </li>
+                    <li>
+                <h4>Legolas</h4>
+                                    full_name:
+                                            Legolas Greenleaf
+                                        <br>
+                                    parent:
+                                            Thranduil
+                                        <br>
+                                    race:
+                                            elf
+                                        <br>
+                                    titles:
+                                                                        Prince of the Wooden Realm,
+                                                                <br>
+                                    ring_bearer:
+                                            nope...
+                                        <br>
+                            </li>
+                    <li>
+                <h4>Gimli</h4>
+                                    full_name:
+                                            Gimli
+                                        <br>
+                                    parent:
+                                            Gloin
+                                        <br>
+                                    race:
+                                            dwarf
+                                        <br>
+                                    titles:
+                                                                        Elf-friend,
+                                                    Lockbearer,
+                                                    Lord of the Glittering Caves,
+                                                                <br>
+                                    ring_bearer:
+                                            nope...
+                                        <br>
+                            </li>
+            </ul>
+</div>
+    
+<h2>For with if</h2>
+
+<div class="well">
+<h3>The Ring Bearers of The Fellowship</h3>
+<ul>
+    <li>
+        <h4>Frodo</h4>
+                    full_name:
+                            Frodo Baggins
+                        <br>
+                    parent:
+                            Drogo
+                        <br>
+                    race:
+                            hobbit
+                        <br>
+                    titles:
+                                                Elf-friend,
+                                    Ring Bearer,
+                                        <br>
+                    ring_bearer:
+                            1
+                        <br>
+            </li>
+    <li>
+        <h4>Sam</h4>
+                    full_name:
+                            Samwise Gamgee
+                        <br>
+                    parent:
+                            Hamfast
+                        <br>
+                    race:
+                            hobbit
+                        <br>
+                    titles:
+                                                Mayor of the Shire,
+                                        <br>
+                    ring_bearer:
+                            1
+                        <br>
+            </li>
+</ul>
+</div>
+
+<h2>For Documentation</h2>
+<p>
+    You can <a href="http://twig.sensiolabs.org/doc/tags/for.html">
+        check out the For documentation</a> for these and other options.
+    </a>
+</p>
+    </main>
+
+            <footer class="container">
+        <hr>
+        
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="./02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="./04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>        </footer>
+    
+    <script src="assets/prism.js"></script>
+</body>
+</html>
