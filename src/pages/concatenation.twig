@@ -1,0 +1,37 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+    <p>
+        You can use <code>{{ '~'|raw }}</code> to combine strings between <code>{{ '{{ }}'|raw }}</code>.
+    </p>
+
+    <pre><code>{% verbatim %}
+{% set Hobbits = {
+    frodo: 'Frodo',
+    samwise: 'Sam',
+    merry: 'Merry',
+    pippin: 'Pippin'
+} %}
+
+The four Hobbits who travelled out of the Shire are
+{{ Hobbits.frodo ~ ", " ~ Hobbits.samwise ~ ", " ~ Hobbits.merry ~ ", and " ~ Hobbits.pippin ~ "." }}
+
+{#
+Or you could write it like this:<br>
+The four Hobbits who travelled out of the Shire are
+{{ Hobbits.frodo }}, {{ Hobbits.samwise }}, {{ Hobbits.merry }}, and {{ Hobbits.pippin }}.
+#}
+    {% endverbatim %}</code></pre>
+
+    <div class="well">
+    {% set Hobbits = {
+        frodo: 'Frodo',
+        samwise: 'Sam',
+        merry: 'Merry',
+        pippin: 'Pippin'
+    } %}
+
+The four Hobbits who travelled out of the Shire are
+{{ Hobbits.frodo ~ ", " ~ Hobbits.samwise ~ ", " ~ Hobbits.merry ~ ", and " ~ Hobbits.pippin ~ "." }}
+</div>
+{% endblock %}

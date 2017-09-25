@@ -1,0 +1,251 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+
+<h2>If Statement</h2>
+
+<p>If the statement resolves or amounts to something true, do what comes after:</p>
+
+<pre><code>{% verbatim %}
+{% set truthy = true %}
+{% set falsey = false %}
+
+{% if truthy %}
+    You'll see this.
+{% endif %}
+
+{% if falsey %}
+    You won't see this.
+{% endif %}
+
+{% endverbatim %}</code></pre>
+
+{% set truthy = true %}
+{% set falsey = false %}
+
+<div class="well">
+{% if truthy %}
+    You'll see this.
+{% endif %}
+
+{% if falsey %}
+    You won't see this.
+{% endif %}
+</div>
+
+<h3>Truthy and Falsey Cautions</h3>
+
+<ul>
+    <li>1 = true (or any number > 0)</li>
+    <li>0 = false</li>
+    <li>null = false</li>
+    <li>Empty strings ('' or "") = false</li>
+    <li>Non-empty strings ('something' or '&nbsp;&nbsp;') = true</li>
+</ul>
+
+<pre><code>{% verbatim %}
+{% set location = 'shire' %}
+
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% endif %} {% if location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% endif %}
+
+{% endverbatim %}</code></pre>
+
+{% set location = 'shire' %}
+
+<div class="well">
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% endif %} {% if location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% endif %}
+</div>
+
+<h3>Switch location and go through the same code</h3>
+<pre><code>{% verbatim %}
+{% set location = 'rivendell' %}
+
+{% endverbatim %}</code></pre>
+
+{% set location = 'rivendell' %}
+
+<div class="well">
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% endif %} {% if location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% endif %}
+</div>
+
+<h2>Else and elseif Statement</h2>
+
+<p>Using elseif allows to add other checks to the code block</p>
+<p>
+    Using else is a catch all.
+    If none of the previous statements amount to true,
+    then do what's in the else block.
+</p>
+
+<p>
+    We can rewrite the above code and use an elseif statement:
+</p>
+
+<pre><code>{% verbatim %}
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% elseif location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% endif %}
+
+{% endverbatim %}</code></pre>
+
+<div class="well">
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% elseif location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% endif %}
+</div>
+
+<p>But if the fellowship is somewhere else, we can catch that with "else":</p>
+
+<pre><code>{% verbatim %}
+{% set location = 'moria' %}
+
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% elseif location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% else %}
+    All that is gold does not glitter, not all those who wander are lost...
+{% endif %}
+
+{% endverbatim %}</code></pre>
+
+{% set location = 'moria' %}
+
+<div class="well">
+{% if location == 'shire' %}
+    In a hole in the ground there lived a hobbit.
+    Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell,
+    nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat:
+    it was a hobbit-hole, and that means comfort.
+{% elseif location == 'rivendell' %}
+    [Rivendell] was perfect whether you liked food, or sleep, or work, or story-telling,
+    or singing, or just sitting and thinking best, or a pleasant mixture of them all.
+    Evil things did not come into that valley.
+{% else %}
+    All that is gold does not glitter, not all those who wander are lost...
+{% endif %}
+</div>
+
+<h2>Other if checks</h2>
+<p>You don't need to always use "==" in if statements. Here's others:</p>
+<ul class="list-unstyled">
+    <li>
+        <h3>Signs: <, >, <=, =></h3>
+        Use greater/lesser than or greater/lesser than or equal to:<br>
+<pre><code>{% verbatim %}
+{% if location == 'weathertop' %}
+    {% set ring_wraiths = 5 %}
+    {% if ring_wraiths < 6 %}
+        Frodo will escape to Rivendell
+    {% else %}
+        Frodo will be captured
+    {% endif %}
+{% endif %}
+
+{% endverbatim %}</code></pre>
+        or
+<pre><code>{% verbatim %}
+{% if location == 'weathertop' %}
+    {% set ring_wraiths = 5 %}
+    {% if ring_wraiths <= 5 %}
+        Frodo will escape to Rivendell
+    {% else %}
+        Frodo will be captured
+    {% endif %}
+{% endif %}
+
+{% endverbatim %}</code></pre>
+
+        <div class="well">
+            {% set ring_wraiths = 5 %}
+            {% if ring_wraiths <= 5 %}
+                Frodo will escape to Rivendell
+            {% else %}
+                Frodo will be captured
+            {% endif %}
+        </div>
+    </li>
+
+    <li>
+        <h3>Not equal: != or not</h3>
+        <p>You can negate a check:</p>
+<pre><code>{% verbatim %}
+{% if location != 'shire' %}Far from home{% endif %}
+
+{% if ring_wraiths != 9 %}Not all are accounted for{% endif %}
+
+{% if not truthy %}
+    Since truthy is true and the not makes it false, this won't show.
+{% else %}
+    So we need an else statement to show something.
+{% endif %}
+
+{% if not falsey %}Negated falsey makes it true!{% endif %}
+
+{% endverbatim %}</code></pre>
+
+<div class="well">
+    {% if location != 'shire' %}Far from home{% endif %}
+    <br>
+    {% if ring_wraiths != 9 %}Not all are accounted for{% endif %}
+    <br>
+    {% if not truthy %}
+        Since truthy is true and the not makes it false, this won't show.
+    {% else %}
+        So we need an else statement to show something.
+    {% endif %}
+    <br>
+    {% if not falsey %}Negated falsey makes it true!{% endif %}
+    <br>
+</div>
+    </li>
+</ul>
+
+
+{% endblock %}

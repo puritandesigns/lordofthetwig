@@ -1,0 +1,48 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+    <p>
+        Twig spits out plain ol' html in the end, but it gives us some handy tools
+        to make writing html easier. Twig adds it own tags to do the heavy lifting.
+    </p>
+    <p>
+        There are a few tags to know when using twig:
+    </p>
+    <ul>
+        <li>
+            <code>{{ '{%  %}'|raw }}</code> - These are used for processing
+            or checking things. Typically they do not print anything to the screen.
+        </li>
+        <li>
+            <code>{{ '{{  }}'|raw }}</code> - These are used for printing things to the screen.
+        </li>
+        <li>
+            <code>{{ '{# #}'|raw }}</code> - These are used for comments in the code.
+            The comments do not show up in the html (Use {{ '<!-- -->'|e }} for that).
+        </li>
+        <li>
+            <code>{{ '{{- -}}'|raw }}</code> - These are used for whitespace control.
+            If you need to have values print next to each other without spaces in between.
+        </li>
+    </ul>
+    <pre><code>
+{% verbatim %}{% if "you won't see this" %}
+    You will see this.
+    {{ 'And this too.' }}
+    {{- 'You will see this right next to "And this too."' -}}
+    {{ 'This will be scrunched up too.' }}
+    {# You won't see this either #}
+{% endif %}{% endverbatim %}
+    </code></pre>
+
+    <div class="well">
+        {% if "you won't see this" %}
+            You will see this.
+            {{ 'And this too.' }}
+            {{- 'You will see this right next to "And this too."' -}}
+            {{ 'This will be scrunched up too.' }}
+            {# You won't see this either #}
+        {% endif %}
+    </div>
+
+{% endblock %}

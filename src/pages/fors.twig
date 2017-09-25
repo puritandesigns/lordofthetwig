@@ -1,0 +1,184 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+    <h1>For Statements</h1>
+    <p>
+        The use of <code>{{ '{% for %}'|raw }}</code> loops allows you to go through
+        arrays or objects one item at a time.
+    </p>
+
+    <h2>Simple for loop</h2>
+<pre><code>{% verbatim %}
+{% set fellowship = {
+    frodo: {
+        full_name: 'Frodo Baggins',
+        parent: 'Drogo',
+        race: 'hobbit',
+        titles: ['Elf-friend','Ring Bearer'],
+        ring_bearer: 1
+    },
+    sam: {
+        full_name: 'Samwise Gamgee',
+        parent: 'Hamfast',
+        race: 'hobbit',
+        titles: ['Mayor of the Shire'],
+        ring_bearer: 1,
+    },
+    merry: {
+        full_name: 'Merriadoc Brandybuck',
+        parent: 'Seradoc',
+        race: 'hobbit',
+        titles: ['Holdwine of the Mark'],
+        ring_bearer: 0
+    },
+    pippin: {
+        full_name: 'Peregrin Took',
+        parent: 'Palladin',
+        race: 'hobbit',
+        titles: ['Knight of Gondor','Pheriannath','Thain'],
+        ring_bearer: 0
+    },
+    gandalf: {
+        full_name: 'Gandalf the Grey',
+        parent: null,
+        race: 'Maiar',
+        titles: ['Greyhame','Stormcrow','Olorin','Incanus','Tharkun','Gandalf the Grey','Gandalf the White','Mithrandir','The Grey Pilgrim','The White Rider','Lathspell'],
+        ring_bearer: 0
+    },
+    aragorn: {
+        full_name: 'Aragorn',
+        parent: 'Arathorn',
+        race: 'human',
+        titles: ['The Dunadan','Longshanks','Strider','Telcontar','Elessar','Wingfoot','Enviyatar','Estel','Thorongil'],
+        ring_bearer: 0
+    },
+    boromir: {
+        full_name: 'Boromir',
+        parent: 'Denethor',
+        race: 'human',
+        titles: ['Captain of the White Tower','High Warden of the White Tower'],
+        ring_bearer: 0
+    },
+    legolas: {
+        full_name: 'Legolas Greenleaf',
+        parent: 'Thranduil',
+        race: 'elf',
+        titles: ['Prince of the Wooden Realm'],
+        ring_bearer: 0
+    },
+    gimli: {
+        full_name: 'Gimli',
+        parent: 'Gloin',
+        race: 'dwarf',
+        titles: ['Elf-friend','Lockbearer','Lord of the Glittering Caves'],
+        ring_bearer: 0
+    }
+} %}
+
+&lt;h3&gt;The Fellowship of the Ring&lt;/h3&gt;
+&lt;ul&gt;
+{% for member in fellowship %}
+    &lt;li&gt;
+        {{ member.full_name -}}
+        {% if member.parent %}
+        , son of {{ member.parent }}
+        {% endif %}
+    &lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;
+{% endverbatim %}
+</code></pre>
+
+<div class="well">
+    <h3>The Fellowship of the Ring</h3>
+    <ul>
+    {% for member in fellowship %}
+        <li>
+            {{ member.full_name -}}
+            {% if member.parent %}, son of {{ member.parent }}{% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+<h2>For key and value</h2>
+    
+<pre><code>{% verbatim %}
+{% for name, member in fellowship %}
+&lt;li&gt;
+    &lt;h4&gt;{{ name|title }}&lt;/h4&gt;
+    {% for key, value in member %}
+        {{ key }}:
+        {% if value is iterable %}
+            {% for val in value %}
+                {{ val }},
+            {% endfor %}
+        {% elseif value is empty %}
+            nope...
+        {% else %}
+            {{ value }}
+        {% endif %}
+        &lt;br&gt;
+    {% endfor %}
+&lt;/li&gt;
+{% endfor %}
+{% endverbatim %}
+</code></pre>
+    
+<div class="well">
+    <h3>The Fellowship of the Ring</h3>
+    <ul>
+        {% for name, member in fellowship %}
+            <li>
+                <h4>{{ name|title }}</h4>
+                {% for key, value in member %}
+                    {{ key }}:
+                    {% if value is iterable %}
+                        {% for val in value %}
+                            {{ val }},
+                        {% endfor %}
+                    {% elseif value is empty %}
+                        nope...
+                    {% else %}
+                        {{ value }}
+                    {% endif %}
+                    <br>
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+    
+<h2>For with if</h2>
+
+<div class="well">
+<h3>The Ring Bearers of The Fellowship</h3>
+<ul>
+{% for name, member in fellowship if member.ring_bearer %}
+    <li>
+        <h4>{{ name|title }}</h4>
+        {% for key, value in member %}
+            {{ key }}:
+            {% if value is iterable %}
+                {% for val in value %}
+                    {{ val }},
+                {% endfor %}
+            {% elseif value is empty %}
+                nope...
+            {% else %}
+                {{ value }}
+            {% endif %}
+            <br>
+        {% endfor %}
+    </li>
+{% endfor %}
+</ul>
+</div>
+
+<h2>For Documentation</h2>
+<p>
+    You can <a href="http://twig.sensiolabs.org/doc/tags/for.html">
+        check out the For documentation</a> for these and other options.
+    </a>
+</p>
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+
+<h1>Filters</h1>
+<p>
+    Filters change what will get printed to the screen. They are denoted by a pipe,
+    then the name of the filter, and then arguments if there are any.
+</p>
+
+<h2>| title</h2>
+<pre><code>{% verbatim %}
+<p>{{ "the lord of the rings" | title }}</p>
+
+{% endverbatim %}</code></pre>
+
+<p class="well">{{ "the lord of the rings" | title }}</p>
+
+<h2>| capitalize</h2>
+<pre><code>{% verbatim %}
+<p>{{ "frodo" | capitalize }}<br>
+{% set sam = "samwise" %}
+{{ sam | capitalize }}
+</p>
+{% endverbatim %}</code></pre>
+
+<p class="well">
+    {{ "frodo" | capitalize }}<br>
+    {% set sam = "samwise" %}
+    {{ sam | capitalize }}
+</p>
+
+<h2>| default</h2>
+<pre><code>{% verbatim %}
+<p>{% set ringwraith = null %}
+{{ ringwraith | default('The Witch King') }}
+<br>
+{% set sauron = "The Dark Lord" %}
+{{ sauron | default("This won't display.") }}
+</p>
+{% endverbatim %}</code></pre>
+
+    <p class="well">
+        {% set ringwraith = null %}
+        {{ ringwraith | default('The Witch King') }}
+        <br>
+        {% set sauron = "The Dark Lord" %}
+        {{ sauron | default("This won't display.") }}
+    </p>
+
+    <h2>| lower & | upper</h2>
+<pre><code>{% verbatim %}
+<p>{{ "THIS WILL BE LOWERCASE" | lower }}
+<br>
+{{ "this will be uppercase" | upper }}
+</p>
+{% endverbatim %}</code></pre>
+
+    <p class="well">
+        {{ "THIS WILL BE LOWERCASE" | lower }}
+        <br>
+        {{ "this will be uppercase" | upper }}
+    </p>
+
+    <h2>| striptags</h2>
+<pre><code>{% verbatim %}
+<p>{{ "&lt;p&gt;Roads go ever &lt;u&gt;on&lt;/u&gt; and &lt;em&gt;on&lt;/em&gt; (&lt;u&gt;with&lt;/u&gt; formatting).&lt;/p&gt;" }}
+</p><p>
+{{ "&lt;p&gt;Roads go ever &lt;u&gt;on&lt;/u&gt; and &lt;em&gt;on&lt;/em&gt; (&lt;u&gt;without&lt;/u&gt; formatting).&lt;/p&gt;" | striptags }}
+</p>
+{% endverbatim %}</code></pre>
+
+<div class="well">
+    <p>
+        {{
+        "<p>Roads go ever <u>on</u> and <em>on</em>
+             (<u>with</u> formatting).</p>"
+        }}
+    </p>
+
+    <p>
+        {{
+            "<p>Roads go ever <u>on</u> and <em>on</em>
+             (<u>without</u> formatting).</p>"
+            | striptags
+        }}
+    </p>
+</div>
+
+<h2>| nl2br (new line to &lt;br&gt;)</h2>
+
+<h3>Sample code</h3>
+
+<pre><code>{% verbatim %}<p>
+{{
+   "Roads go ever ever on,
+    Over rock and under tree,
+    By caves where never sun has shone,
+    By streams that never find the sea;
+    Over snow by winter sown,
+    And through the merry flowers of June,
+    Over grass and over stone,
+    And under mountains in the moon." | nl2br
+}}
+</p>
+{% endverbatim %}</code></pre>
+
+<h3>Without nl2br</h3>
+
+<p class="well">
+    {{
+        "Roads go ever ever on,
+        Over rock and under tree,
+        By caves where never sun has shone,
+        By streams that never find the sea;
+        Over snow by winter sown,
+        And through the merry flowers of June,
+        Over grass and over stone,
+        And under mountains in the moon."
+    }}
+</p>
+
+<h3>With nl2br</h3>
+
+<p class="well">
+    {{
+        "Roads go ever ever on,
+        Over rock and under tree,
+        By caves where never sun has shone,
+        By streams that never find the sea;
+        Over snow by winter sown,
+        And through the merry flowers of June,
+        Over grass and over stone,
+        And under mountains in the moon."
+    | nl2br }}
+</p>
+
+<h3>Add in striptags</h3>
+<pre><code>{% verbatim %}<p>
+{{
+   "&lt;p&gt;Roads go ever ever on,&lt;br&gt;
+    Over rock and under tree,&lt;br&gt;
+    By caves where never sun has shone,&lt;br&gt;
+    By streams that never find the sea;
+    &lt;/p&gt;&lt;p&gt;Over snow by winter sown,&lt;br&gt;
+    And through the merry flowers of June,&lt;br&gt;
+    Over grass and over stone,&lt;br&gt;
+    And under mountains in the moon.
+    &lt;/p&gt;" | striptags | nl2br
+}}
+</p>
+{% endverbatim %}</code></pre>
+
+    <div class="well">
+        {{
+        "<p>Roads go ever ever on,<br>
+        Over rock and under tree,<br>
+        By caves where never sun has shone,<br>
+        By streams that never find the sea;
+        </p><p>Over snow by winter sown,<br>
+        And through the merry flowers of June,<br>
+        Over grass and over stone,<br>
+        And under mountains in the moon.
+        </p> " | striptags | nl2br }}
+    </div>
+
+    <h2>| trim</h2>
+<pre><code>{% verbatim %}<p>
+{{ "There will not be a large space between sentences." }}
+{{ "       Even though there's a large gap in the code." | trim }}
+</p><p>
+{{ "......You can also remove other characters......" | trim('.') }}<br>
+{{ "!.'And it doesn't have to be just one type of character...." | trim(".!'") }}
+</p>
+{% endverbatim %}</code></pre>
+
+    <div class="well">
+        <p>
+            {{ "There will not be a large space between sentences." }}
+            {{ "       Even though there's a large gap in the code." | trim }}
+        </p>
+
+        <p>
+            {{ "......You can also remove other characters......" | trim('.') }}<br>
+            {{ "!.'And it doesn't have to be just one type of character...." | trim(".!'") }}
+        </p>
+    </div>
+{% endblock %}

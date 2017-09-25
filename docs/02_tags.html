@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Lord of the Twig</title>
+
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/prism.css" rel="stylesheet">
+    <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+
+            
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>    
+    <main id="content" class="container language-twig">
+        <h1>The Lord of the Twig</h1>
+            <p>
+        Twig spits out plain ol' html in the end, but it gives us some handy tools
+        to make writing html easier. Twig adds it own tags to do the heavy lifting.
+    </p>
+    <p>
+        There are a few tags to know when using twig:
+    </p>
+    <ul>
+        <li>
+            <code>{%  %}</code> - These are used for processing
+            or checking things. Typically they do not print anything to the screen.
+        </li>
+        <li>
+            <code>{{  }}</code> - These are used for printing things to the screen.
+        </li>
+        <li>
+            <code>{# #}</code> - These are used for comments in the code.
+            The comments do not show up in the html (Use &lt;!-- --&gt; for that).
+        </li>
+        <li>
+            <code>{{- -}}</code> - These are used for whitespace control.
+            If you need to have values print next to each other without spaces in between.
+        </li>
+    </ul>
+    <pre><code>
+{% if "you won't see this" %}
+    You will see this.
+    {{ 'And this too.' }}
+    {{- 'You will see this right next to "And this too."' -}}
+    {{ 'This will be scrunched up too.' }}
+    {# You won't see this either #}
+{% endif %}
+    </code></pre>
+
+    <div class="well">
+                    You will see this.
+            And this too.You will see this right next to "And this too."This will be scrunched up too.
+                        </div>
+
+    </main>
+
+            <footer class="container">
+        <hr>
+        
+<nav class="container">
+    <ul class="nav nav-tabs">        <li role="presentation" class="active">            <a href="./01_home.html">                Home            </a>        </li>                <li role="presentation">            <a href="02_tags.html">                Tags            </a>        </li>                <li role="presentation">            <a href="./03_variables.html">                Variables            </a>        </li>                <li role="presentation">            <a href="04_concatenation.html">                Concatenation            </a>        </li>                <li role="presentation">            <a href="./05_filters.html">                Filters            </a>        </li>                <li role="presentation">            <a href="./06_if-statements.html">                If Statements            </a>        </li>                <li role="presentation">            <a href="./07_advanced-ifs.html">                Advanced Ifs            </a>        </li>                <li role="presentation">            <a href="./08_fors.html">                For Loops            </a>        </li>                <li role="presentation">            <a href="./09_includes.html">                Includes            </a>        </li>                <li role="presentation">            <a href="./10_blocks.html">                Blocks            </a>        </li>    </ul>
+</nav>        </footer>
+    
+    <script src="assets/prism.js"></script>
+</body>
+</html>

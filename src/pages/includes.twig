@@ -1,0 +1,89 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+<h2>Using <code>{{ '{% include %}'|raw }}</code></h2>
+<p>
+    The <code>{{ '{% include %}'|raw }}</code> tag allows you to pull in
+    a completely different file.
+</p>
+
+<h3>Theoretical file structure</h3>
+<pre><code>
+- includes/
+    - frodo.twig
+    - sam.twig
+    - merry.twig
+    - pippin.twig
+    ...
+- pages/
+    - shire.twig
+    - rivendell.twig
+    - fellowship.twig
+    ...
+</code></pre>
+
+<h3>Contents of <code>/includes/frodo.twig</code></h3>
+
+<pre><code>
+&lt;h3&gt;Frodo Baggins {{ '{% demo_variable|default("") %}'|raw }}&lt;/h3&gt;
+
+&lt;p&gt;
+    Frodo is introduced in The Fellowship of the Ring as the adoptive heir of
+    Bilbo Baggins. The chapter "A Long-expected Party" relates that Frodo's
+    parents Drogo Baggins and Primula Brandybuck had been killed in a boating
+    accident when Frodo was 12.
+&lt;/p&gt;
+&lt;p&gt;
+    Frodo subsequently spent the next nine years living with his maternal family,
+    the Brandybucks in Brandy Hall. At the age of 21 he was adopted by his cousin,
+    Bilbo, who brought him to live at Bag End. He and Bilbo shared the same birthday,
+    the 22nd of 'September'.
+&lt;/p&gt;
+&lt;p&gt;
+    It was Bilbo who introduced the Elvish languages to Frodo,
+    and they often shared long walking trips together.
+&lt;/p&gt;
+
+</code></pre>
+
+<h3>Within <code>/pages/fellowship.twig</code></h3>
+
+<pre><code>{% verbatim %}
+Content, more content...
+
+{% set demo_variable = "of the Shire" %}
+<div class="well">{% include '/includes/frodo.twig' %}</div>
+
+Rollin' on with the content....
+{% endverbatim %}
+</code></pre>
+
+<div class="well">
+    <p>Content, more content...</p>
+
+    {% set demo_variable = "of the Shire" %}
+
+    {% include '/includes/frodo.twig' %}
+
+    <p>Rollin' on with the content....</p>
+</div>
+
+
+<h3>Include Documentation</h3>
+<p>
+    You can <a href="http://twig.sensiolabs.org/doc/tags/include.html">
+        check out the Include tag documentation</a> for more information.
+    </a>
+    <br><br>
+    You can also:
+</p>
+
+<ul>
+    <li>Limit what variables get passed to the included file with <code>only</code></li>
+    <li>Add new variables that get passed using <code>with {key: value}</code></li>
+    <li>Pass a list of files to include. The first one found will be included</li>
+    <li>Protect against missing files with <code>ignore missing</code></li>
+</ul>
+{% endblock %}
+
+

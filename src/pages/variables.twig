@@ -1,0 +1,87 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+    <p>
+        Variables are like addresses where you can find (and put) bits of information (data).
+        They can store something as simple as, "hello" or 42, or very complicated
+        arrays or objects.
+    </p>
+    <ul>
+        <li>Arrays (<code>[ ]</code>) - Think of them as lists of values</li>
+        <li>
+            Objects (<code>{ }</code>) - A group of key, value pairs
+            (<code>{key: 'value', nextKey, 'nextValue'}</code>).
+        </li>
+    </ul>
+    <p>
+        The values of arrays can be strings, numbers or other arrays or objects.
+    </p>
+
+    <pre><code>
+{% autoescape %}{% verbatim %}{% set location = 'shire' %}
+
+<p>The Hobbits live in the {{ location }}.</p>
+
+{% set locations = {
+    Hobbits: {
+        Frodo: 'Bag End',
+        Samwise: 'Bag Shot Row',
+        Merry: 'Buckland',
+        Pippin: 'Tookland'
+    },
+    Aragorn: 'Rivendell',
+    Gandalf: 'all lands as The Grey Pilgrim',
+    Boromir: 'Gondor',
+    Legolas: 'Mirkwood',
+    Gimli: 'Erebor'
+} %}
+
+<p>Frodo lives in {{ locations.Hobbits.Frodo }}</p>
+
+<p>Sam lives in {{ locations['Hobbits']['Samwise'] }}</p>
+
+<p>Merry lives in {{ locations['Hobbits'].Merry }}</p>
+
+{% set group = 'Hobbits' %}
+{% set person = 'Pippin' %}
+
+<p>{{ person }} lives in {{ locations[group][person] }}</p>
+
+<p>Aragorn lives in {{ locations.Aragorn }}</p>
+
+</code></pre>{% endverbatim %}
+    {% endautoescape %}
+
+    <div class="well">
+        {% set location = 'shire' %}
+
+        <p>The Hobbits live in the {{ location }}.</p>
+
+        {% set locations = {
+            Hobbits: {
+                Frodo: 'Bag End',
+                Samwise: 'Bag Shot Row',
+                Merry: 'Buckland',
+                Pippin: 'Tookland'
+            },
+            Aragorn: 'Rivendell',
+            Gandalf: 'all lands as The Grey Pilgrim',
+            Boromir: 'Gondor',
+            Legolas: 'Mirkwood',
+            Gimli: 'Erebor'
+        } %}
+
+        <p>Frodo lives in {{ locations.Hobbits.Frodo }}</p>
+
+        <p>Sam lives in {{ locations['Hobbits']['Samwise'] }}</p>
+
+        <p>Merry lives in {{ locations['Hobbits'].Merry }}</p>
+
+        {% set group = 'Hobbits' %}
+        {% set person = 'Pippin' %}
+
+        <p>{{ person }} lives in {{ locations[group][person] }}</p>
+
+        <p>Aragorn lives in {{ locations.Aragorn }}</p>
+    </div>
+{% endblock %}
