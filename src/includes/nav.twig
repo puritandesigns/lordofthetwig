@@ -14,7 +14,8 @@
 <nav class="container">
     <ul class="nav nav-tabs">
         {% for url, title in navs %}
-        <li role="presentation" {% if active_page == url
+
+            <li role="presentation" {% if active_page == url
             %}class="active"{% endif %}>
             <a href="./?page={{ url }}">
                 {{ title }}
